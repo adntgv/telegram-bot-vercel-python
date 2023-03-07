@@ -3,6 +3,7 @@ import json
 from django.http import HttpResponse
 from .bot import bot_tele
 from .transcriber import youtube_transcribe
+from .summarizer import transcription_summarize
 
 
 def index(request):
@@ -19,3 +20,10 @@ def index(request):
 def transcribe(request):
     id = request.GET.get('id')
     return HttpResponse(asyncio.run(youtube_transcribe(id)))
+
+
+def summarize(request):
+    id = request.GET.get('id')
+    transcription = asyncio.run(youtube_transcribe(id))
+    summary = transcription_summarize(transcription)
+    return HttpResponse(summary)
