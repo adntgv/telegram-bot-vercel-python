@@ -2,6 +2,8 @@ import asyncio
 import json
 from django.http import HttpResponse
 from .bot import bot_tele
+from .transcriber import youtube_transcribe
+
 
 def index(request):
     if request.method == 'POST':
@@ -12,3 +14,8 @@ def index(request):
         return HttpResponse("ok")
     else:
         return HttpResponse("hello world!")
+
+
+def transcribe(request):
+    id = request.GET.get('id')
+    return HttpResponse(asyncio.run(youtube_transcribe(id)))

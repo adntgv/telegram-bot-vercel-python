@@ -4,8 +4,7 @@ from telegram.ext import (
     CommandHandler,
     ContextTypes,
 )
-from youtube_transcript_api import YouTubeTranscriptApi
-
+from .transcriber import youtube_transcribe
 from os import getenv
 
 # Define a few command handlers.
@@ -15,7 +14,7 @@ async def help(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_html(text="help me!")
 async def transcript(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     id = update.message.text.split(" ")[1]
-    srt = YouTubeTranscriptApi.get_transcript(id)
+    srt = youtube_transcribe(id)
     await update.message.reply_text(text=srt)
 
 async def bot_tele(text):
