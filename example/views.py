@@ -27,3 +27,8 @@ def summarize(request):
     transcription = asyncio.run(youtube_transcribe(id))
     summary = transcription_summarize(transcription)
     return HttpResponse(summary)
+
+def handle(request):
+    id = request.GET.get('id')
+    summary = asyncio.run(handle(id)) 
+    return HttpResponse(summary)
