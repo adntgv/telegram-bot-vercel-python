@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from .bot import bot_tele
 from .transcriber import youtube_transcribe
 from .summarizer import transcription_summarize
+from .app import handle as h
 
 
 def index(request):
@@ -30,5 +31,5 @@ def summarize(request):
 
 def handle(request):
     id = request.GET.get('id')
-    summary = asyncio.run(handle(id)) 
+    summary = asyncio.run(h(id)) 
     return HttpResponse(summary)
