@@ -4,7 +4,7 @@ from telegram.ext import (
     CommandHandler,
     ContextTypes,
 )
-from app import handle
+from .app import handle
 from os import getenv
 
 # Define a few command handlers.
