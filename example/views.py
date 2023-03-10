@@ -31,5 +31,7 @@ def summarize(request):
 
 def handle(request):
     id = request.GET.get('id')
+    if id is None:
+        return HttpResponse("id is None")
     summary = asyncio.run(h(id)) 
     return HttpResponse(summary)
